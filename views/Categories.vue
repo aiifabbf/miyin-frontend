@@ -1,7 +1,7 @@
 <template>
     <v-container fluid grid-list-lg>
         <div class="logo">
-            <img class="logo__image" src="../Noto_Emoji_KitKat_263a.svg" alt=""> 觅音
+            <img class="logo__image" src="../logo.png" alt=""> 觅音
         </div>
         <v-card>
             <v-list>

@@ -4,6 +4,7 @@
             <v-flex md12>
                 <v-card>
                     <v-img :src="profile.avatar"></v-img>
+                    <v-chip absolute top left>{{ profile.role }}</v-chip>
                     <v-card-title>
                         <!-- <h1>{{ profile.name }}</h1> -->
                         {{ profile.name }}

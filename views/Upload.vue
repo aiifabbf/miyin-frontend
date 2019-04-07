@@ -27,6 +27,12 @@
                                 </template>
                             </v-select>
                         </v-flex>
+                        <v-flex md12>
+                            <v-text-field label="标题" v-model="title"></v-text-field>
+                        </v-flex>
+                        <v-flex md12>
+                            <v-textarea label="描述" v-model="description" auto-grow></v-textarea>
+                        </v-flex>
                     </v-layout>
                 </v-container>
             </v-card-text>
@@ -46,28 +52,43 @@
             return {
                 active: false,
                 categories: [],
+                title: "",
+                description: "",
                 uploading: false,
                 allowedCategories: [
-                    "时下流行",
-                    "二极管",
-                    "三极管",
-                    "真空管",
-                    "电容",
-                    "电阻",
+                    "音乐",
+                    "影视",
+                    "动漫",
+                    "综艺娱乐",
+                    "生活",
                 ],
             }
         },
         methods: {
+            revert: function() {
+                this.categories = [];
+                this.title = "";
+                this.description = "";
+            },
             upload: function () {
                 let form = new FormData();
                 let fileInput = document.querySelector("input[type=file]");
                 form.append("bytes", fileInput.files[0]);
-                form.append("categories", this.categories);
+                // form.append("categories", this.categories);
+                // form.append("title", this.title);
+                // form.append("description", this.description);
+                form.append("meta", JSON.stringify({
+                    categories: this.categories,
+                    title: this.title,
+                    description: this.description
+                }));
                 console.log(form);
                 this.uploading = true;
                 let self = this;
-                setTimeout(function() {
+                setTimeout(function () {
                     self.uploading = false;
+                    self.revert();
+                    self.active = false;
                 }, 2000);
             }
         }

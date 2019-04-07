@@ -16,7 +16,8 @@
             </v-flex>
         </v-layout> -->
         <v-img>
-            <video :src="feed.src" controls></video>
+            <video :src="feed.src" controls v-if="feed.playable"></video>
+            <vip v-else></vip>
         </v-img>
 
         <!-- <v-card-title>
@@ -43,6 +44,7 @@
                 <h3 class="headline">
                     {{ feed.title }}
                     <v-chip v-for="category in feed.categories">{{ category }}</v-chip>
+                    <v-chip v-if="feed.requireVIP">大会员专享</v-chip>
                 </h3>
                 <div>
                     {{ feed.description }}
@@ -83,6 +85,8 @@
 </style>
 
 <script>
+    import VIP from "../views/VIP.vue"
+
     export default {
         name: "feed",
         props: [
@@ -100,6 +104,9 @@
                 feed.categories = feed.categories.slice(0, likeIndex).concat(feed.categories.slice(likeIndex + 1));
                 feed.likes -= 1;
             }
+        },
+        components: {
+            vip: VIP
         }
     }
 </script>
