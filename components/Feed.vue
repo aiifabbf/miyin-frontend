@@ -17,7 +17,10 @@
         </v-layout> -->
         <v-img>
             <video :src="feed.src" controls v-if="feed.playable"></video>
-            <vip v-else></vip>
+            <div style="position: relative;" v-if="!feed.playable">
+                <video :src="feed.src" style="filter: blur(20px);"></video>
+                <vip></vip>
+            </div>
         </v-img>
 
         <!-- <v-card-title>
