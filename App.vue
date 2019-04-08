@@ -21,14 +21,26 @@
                     <!-- <router-view></router-view> -->
                     <v-layout>
                         <v-flex md3>
-                            <categories :categories.sync="categories" :activeCategory="activeCategory"
-                                v-on:update:activeCategory="updateActiveCategory($event)"></categories>
                         </v-flex>
                         <v-flex md6>
                             <trends :feeds="filteredFeeds"></trends>
                         </v-flex>
                         <v-flex md3>
-                            <me :profile="profile"></me>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-content>
+            <!-- fixed content -->
+            <v-content style="width: 100vw; position: fixed; top: 0;">
+                <v-container>
+                    <v-layout>
+                        <v-flex md3>
+                            <categories :categories.sync="categories" :activeCategory="activeCategory"
+                            v-on:update:activeCategory="updateActiveCategory($event)"></categories>
+                        </v-flex>
+                        <v-flex md6></v-flex>
+                        <v-flex md3>
+                                <me :profile="profile"></me>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -285,27 +297,28 @@ html {
         methods: {
             updateActiveCategory: function (activeCategory) {
                 let self = this;
-                console.log(activeCategory)
-                this.activeCategory = activeCategory
+                console.log(activeCategory);
+                this.activeCategory = activeCategory;
                 if (activeCategory === "全部") {
-                    this.filteredFeeds = this.feeds
+                    this.filteredFeeds = this.feeds;
                 } else {
                     this.filteredFeeds = this.feeds.filter(function (v) {
                         if (v.categories.indexOf(activeCategory) !== -1) {
-                            return true
+                            return true;
                         } else {
-                            return false
+                            return false;
                         }
-                    })
+                    });
                 }
                 this.feeds.map(function (feed) {
                     if (feed.requireVIP && self.profile.role !== "大会员") {
                         feed.playable = false;
                     } else {
                         feed.playable = true;
-                    }
-                    console.log(feed)
-                })
+                    };
+                    console.log(feed);
+                });
+                window.scrollTo({top: 0});
             }
         },
         mounted: function () {
