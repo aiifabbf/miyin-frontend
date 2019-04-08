@@ -31,16 +31,16 @@
                 </v-container>
             </v-content>
             <!-- fixed content -->
-            <v-content style="width: 100vw; position: fixed; top: 0;">
+            <v-content style="width: 100vw; position: fixed; top: 0; pointer-events: none;">
                 <v-container>
                     <v-layout>
-                        <v-flex md3>
+                        <v-flex md3 style="pointer-events: auto;">
                             <categories :categories.sync="categories" :activeCategory="activeCategory"
-                            v-on:update:activeCategory="updateActiveCategory($event)"></categories>
+                                v-on:update:activeCategory="updateActiveCategory($event)"></categories>
                         </v-flex>
                         <v-flex md6></v-flex>
-                        <v-flex md3>
-                                <me :profile="profile"></me>
+                        <v-flex md3 style="pointer-events: auto;">
+                            <me :profile="profile"></me>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -318,7 +318,7 @@ html {
                     };
                     console.log(feed);
                 });
-                window.scrollTo({top: 0});
+                window.scrollTo({ top: 0 });
             }
         },
         mounted: function () {
