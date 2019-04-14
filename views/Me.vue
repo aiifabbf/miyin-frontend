@@ -13,7 +13,7 @@
                         <!-- <v-btn flat>
                             我喜欢过的视频
                         </v-btn> -->
-                        <upload></upload>
+                        <upload v-on:upload="onUpload($event)"></upload>
                         <!-- <v-list>
                             <v-list-tile @click="">
                                 我喜欢过的视频
@@ -56,6 +56,11 @@
         ],
         components: {
             Upload: Upload
+        },
+        methods: {
+            onUpload: function(event) {
+                this.$emit("upload", event);
+            }
         }
     }
 </script>

@@ -65,12 +65,13 @@
             }
         },
         methods: {
-            revert: function() {
+            revert: function () {
                 this.categories = [];
                 this.title = "";
                 this.description = "";
             },
             upload: function () {
+                let self = this;
                 let form = new FormData();
                 let fileInput = document.querySelector("input[type=file]");
                 form.append("bytes", fileInput.files[0]);
@@ -82,9 +83,22 @@
                     title: this.title,
                     description: this.description
                 }));
+
+                let feed = {
+                    "title": this.title,
+                    "likes": 0,
+                    "src": "",
+                    "categories": this.categories.concat(["我上传的"])
+                };
+                let reader = new FileReader();
+                reader.addEventListener("load", function(event) {
+                    feed.src = event.target.result;
+                    self.$emit("upload", feed);
+                });
+                reader.readAsDataURL(fileInput.files[0]);
+
                 console.log(form);
                 this.uploading = true;
-                let self = this;
                 setTimeout(function () {
                     self.uploading = false;
                     self.revert();

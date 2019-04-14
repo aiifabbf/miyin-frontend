@@ -40,7 +40,7 @@
                         </v-flex>
                         <v-flex md6></v-flex>
                         <v-flex md3 style="pointer-events: auto;">
-                            <me :profile="profile"></me>
+                            <me :profile="profile" v-on:upload="onUpload($event)"></me>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -319,6 +319,12 @@ html {
                     console.log(feed);
                 });
                 window.scrollTo({ top: 0 });
+            },
+            onUpload: function (event) {
+                console.log(event);
+                event.requireVIP = false;
+                this.feeds.splice(0, 0, event);
+                this.updateActiveCategory(this.activeCategory);
             }
         },
         mounted: function () {
