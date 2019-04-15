@@ -13,19 +13,19 @@
         <footer>
 
         </footer> -->
-        <v-app>
+        <v-app style="background: url(tomoko-uji-627708-unsplash.jpg) no-repeat; background-attachment: fixed; background-size: cover;">
             <!-- <v-navigation-drawer app></v-navigation-drawer> -->
             <!-- <v-toolbar app></v-toolbar> -->
             <v-content>
                 <v-container>
                     <!-- <router-view></router-view> -->
                     <v-layout>
-                        <v-flex md3>
+                        <v-flex md2>
                         </v-flex>
-                        <v-flex md6>
+                        <v-flex md8>
                             <trends :feeds="filteredFeeds"></trends>
                         </v-flex>
-                        <v-flex md3>
+                        <v-flex md2>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -34,12 +34,12 @@
             <v-content style="width: 100vw; position: fixed; top: 0; pointer-events: none;">
                 <v-container>
                     <v-layout>
-                        <v-flex md3 style="pointer-events: auto;">
+                        <v-flex md2 style="pointer-events: auto;">
                             <categories :categories.sync="categories" :activeCategory="activeCategory"
                                 v-on:update:activeCategory="updateActiveCategory($event)"></categories>
                         </v-flex>
-                        <v-flex md6></v-flex>
-                        <v-flex md3 style="pointer-events: auto;">
+                        <v-flex md8></v-flex>
+                        <v-flex md2 style="pointer-events: auto;">
                             <me :profile="profile" v-on:upload="onUpload($event)"></me>
                         </v-flex>
                     </v-layout>
